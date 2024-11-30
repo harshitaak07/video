@@ -1,12 +1,9 @@
-// Example for the correct usage in Next.js dynamic routing
-
 import { notFound } from "next/navigation";
 import VideoPlayer from "../../../components/videoPlayer";
 
-// Mock video data (this should ideally come from your database or API)
 const videos = [
   {
-    id: "1",
+    id: "1", // id is a string in the data
     title: "Video 1",
     url: "https://d39dwc9mjexlur.cloudfront.net/cute.mp4",
     thumbnail: "/images/thumbnail1.jpeg",
@@ -26,25 +23,24 @@ const videos = [
 ];
 
 // VideoPage component
-export default async function VideoPage(
-  props: {
-    params: Promise<{ id: string }>; // Directly expecting `id` from params, no Promise wrapping
-  }
-) {
+export default async function VideoPage(props: {
+  params: Promise<{ id: string }>; // Directly expecting `id` from params, no Promise wrapping
+}) {
   const params = await props.params;
   const { id } = params;
 
-  // Find the video by id
+  // Find the video based on the 'id' from the route
   const video = videos.find((video) => video.id === id);
 
+  // If no video is found, show a 404 page
   if (!video) {
-    notFound(); // Trigger 404 if video not found
+    notFound();
   }
 
   return (
     <div className="p-4">
       <h1 className="text-center text-2xl font-bold mb-4">{video.title}</h1>
-      <VideoPlayer video={video} /> {/* Pass the entire video object here */}
+      <VideoPlayer video={video} />
     </div>
   );
 }
