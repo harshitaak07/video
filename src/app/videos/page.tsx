@@ -1,5 +1,6 @@
+"use client";
 import VideoList from "@/components/videoList";
-
+import React from "react";
 export default function VideosPage() {
   return (
     <main>

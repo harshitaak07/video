@@ -2,7 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Lottie from "lottie-react";
+import dynamic from "next/dynamic";
+
+const Lottie = dynamic(() => import("lottie-react"), { ssr: false }); // Ensure Lottie is client-side only
 import overlayAnimation from "../../public/animations/Animation.json";
 
 export default function VideoList() {
