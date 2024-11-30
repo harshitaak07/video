@@ -26,11 +26,12 @@ const videos = [
 ];
 
 // VideoPage component
-export default function VideoPage({
-  params,
-}: {
-  params: { id: string }; // Directly expecting `id` from params, no Promise wrapping
-}) {
+export default async function VideoPage(
+  props: {
+    params: Promise<{ id: string }>; // Directly expecting `id` from params, no Promise wrapping
+  }
+) {
+  const params = await props.params;
   const { id } = params;
 
   // Find the video by id
